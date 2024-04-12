@@ -1,7 +1,7 @@
 const CountryList = (props) => {
     return (
         <div className='countries-container'>
-            {props.countries.map((country, index) => (
+            {props.filteredCountries.map((country, index) => (
                 <div className='card-container' key={index}>
                     <img src={country.flag.medium} alt={country.name} />
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import SearchBar from './components/SearchBar/SearchBar';
 import RegionSelect from './components/RegionSelect/RegionSelect';
 import CountryList from './components/CountryList/CountryList';
@@ -60,14 +61,14 @@ const App = () => {
     return (
         <div className='main-container'>
             <div className='search-container'>
-                <SearchBar onChange={handleOnSearchChange} />
+                <SearchBar handleOnSearchChange={handleOnSearchChange} />
                 <RegionSelect
-                    regions={allRegions}
-                    onChange={handleChangeRegion}
+                    allRegions={allRegions}
+                    handleChangeRegion={handleChangeRegion}
                 />
             </div>
 
-            <CountryList countries={filteredCountries} />
+            <CountryList filteredCountries={filteredCountries} />
         </div>
     );
 };

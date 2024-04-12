@@ -3,7 +3,7 @@ const SearchBar = (props) => {
         <input
             type='search'
             placeholder='Search for...'
-            onChange={props.onChange}
+            onChange={props.handleOnSearchChange}
         />
     );
 };
