@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { MoonLoader } from 'react-spinners';
+
 import SearchBar from './components/SearchBar/SearchBar';
 import RegionSelect from './components/RegionSelect/RegionSelect';
 import CountryList from './components/CountryList/CountryList';
@@ -8,11 +10,8 @@ const App = () => {
     const [countries, setCountries] = useState([]);
     const [searchField, setSearchField] = useState('');
     const [allRegions, setAllRegions] = useState([]);
-    const [oneRegion, setOneRegion] = useState('allRegions');
-
-    useEffect(() => {
-        getCountries();
-    }, []);
+    const [selectedRegion, setSelectedRegion] = useState('allRegions');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getAllRegions = () => {
@@ -24,6 +23,7 @@ const App = () => {
         };
 
         getAllRegions();
+        getCountries();
     }, [countries]);
 
     const getCountries = async () => {
@@ -33,6 +33,9 @@ const App = () => {
             .then((response) => response.json())
             .then((data) => {
                 setCountries(Object.values(data));
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 1500);
             })
             .catch((err) => {
                 console.error(err);
@@ -45,7 +48,8 @@ const App = () => {
             country.capital.toLowerCase().includes(searchField.toLowerCase());
 
         const isMatchingRegion =
-            oneRegion === 'allRegions' || country.region === oneRegion;
+            selectedRegion === 'allRegions' ||
+            country.region === selectedRegion;
 
         return isMatchingSearch && isMatchingRegion;
     });
@@ -55,13 +59,20 @@ const App = () => {
     };
 
     const handleChangeRegion = (event) => {
-        setOneRegion(event.target.value);
+        setSelectedRegion(event.target.value);
     };
 
-    return (
+    return isLoading ? (
+        <div className='loader-container'>
+            <MoonLoader color='whitesmoke' size={300} />
+        </div>
+    ) : (
         <div className='main-container'>
             <div className='search-container'>
-                <SearchBar handleOnSearchChange={handleOnSearchChange} />
+                <SearchBar
+                    value={searchField}
+                    handleOnSearchChange={handleOnSearchChange}
+                />
                 <RegionSelect
                     allRegions={allRegions}
                     handleChangeRegion={handleChangeRegion}

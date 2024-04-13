@@ -4,37 +4,60 @@ body {
     padding: 50;
     font-family: sans-serif;
 
+    .loader-container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .main-container {
-        width: 85vw;
-        margin: 2em auto;
+        margin: 2rem auto;
         display: grid;
         grid-gap: 20px;
 
         .search-container {
             display: flex;
-            text-align: center;
             justify-content: space-between;
             border: none;
-            outline: none;
-            padding: 10px;
-            width: 85vw;
-            line-height: 30px;
             margin: auto;
+            padding: auto;
+            width: 75vw;
         }
 
         .countries-container {
-            width: 85vw;
-            margin: 2em auto;
+            width: 75vw;
+            margin: 2rem auto;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-gap: 20px;
 
             .card-container {
+                width: 220px;
                 display: flex;
                 flex-direction: column;
                 border: 1px solid #808080;
                 border-radius: 5px;
-                padding: 25px;
+                margin: 0;
+                padding: 0;
+
+                .image-container {
+                    width: 220px;
+                    height: 140px;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+
+                    img {
+                        width: 240px;
+                        margin-left: -10px;
+                        margin-top: -15px;
+                    }
+                }
+
+                .content-container {
+                    margin: 15px;
+                }
             }
         }
     }
